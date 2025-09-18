@@ -1,0 +1,43 @@
+@startuml
+title Customer Shopping Flow
+left to right direction
+
+actor Customer
+
+rectangle "Store" as Store
+rectangle "ShoppingCart" as Cart
+rectangle "Order" as Order
+rectangle "Payment" as Payment
+rectangle "Shipping" as Shipping
+
+Customer -> Store
+note on link
+  View products
+end note
+
+Customer -> Cart
+note on link
+  Add product to cart and show cart
+end note
+
+Customer -> Order
+note on link
+  Place order
+end note
+
+Order -> Payment
+note on link
+  Assign payment
+end note
+
+Order -> Shipping
+note on link
+  Assign shipping
+end note
+
+Order -> Customer
+note on link
+  Add order to customer's orders
+end note
+
+@enduml

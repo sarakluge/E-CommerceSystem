@@ -1,0 +1,96 @@
+@startuml
+title E-Commerce Classes
+
+class Store {
+  - products : List<Product>
+  - customers : List<Customer>
+  + addProduct(p : Product)
+  + showProducts()
+  + addCustomer(c : Customer)
+  + showCustomers()
+  + createOrder(c : Customer, cart : ShoppingCart, s : Shipping, p : Payment) : Order
+}
+
+class Product {
+  - name : String
+  - price : double
+  - description : String
+  - stock : int
+  + getName() : String
+  + getPrice() : double
+  + getDescription() : String
+  + getStock() : int
+  + setStock(stock : int)
+}
+
+class Customer {
+  - name : String
+  - email : String
+  - address : String
+  - cart : ShoppingCart
+  - orders : List<Order>
+  + getName() : String
+  + getEmail() : String
+  + getAddress() : String
+  + getCart() : ShoppingCart
+  + addOrder(order : Order)
+  + showOrders()
+}
+
+class ShoppingCart {
+  - cartItems : List<CartItem>
+  + getCartItems(): List<CartItem>
+  + addProduct(p : Product, qty : int)
+  + removeProductByIndex(i : int)
+  + showCart()
+  + calculateTotal() : double
+  + clear()
+}
+
+class CartItem {
+  - product : Product
+  - quantity : int
+  + getProduct() : Product
+  + getQuantity() : int
+  + setQuantity(q : int)
+  + toString() : String
+}
+
+class Order {
+  - customer : Customer
+  - items : List<CartItem>
+  - shipping : Shipping
+  - payment : Payment
+  - status : String
+  + getStatus() : String
+  + setStatus(s : String)
+  + toString() : String
+}
+
+class Shipping {
+  - deliveryMethod : String
+  + getDeliveryMethod() : String
+}
+
+class Payment {
+  - method : String
+  - total : double
+  + getMethod() : String
+  + getTotal() : double
+}
+
+' -------------------
+' Relationships
+' -------------------
+Store --> Product
+Store --> Customer
+Customer --> ShoppingCart
+Customer --> Order
+ShoppingCart --> CartItem
+CartItem --> Product
+Order --> CartItem
+Order --> Shipping
+Order --> Payment
+Order --> Customer
+
+@enduml
