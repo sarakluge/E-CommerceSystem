@@ -15,12 +15,16 @@ public class Main {
 
         boolean runMainMenu = true;
         while (runMainMenu) {
-            System.out.println("\n=== E-COMMERCE SYSTEM ===");
-            System.out.println("1. Show products");
-            System.out.println("2. Add Customer");
-            System.out.println("3. Show customers");
-            System.out.println("4. Shop as an customer");
-            System.out.print("Choose a number: ");
+            System.out.println("\n========================================");
+            System.out.println("🛒  E-COMMERCE SYSTEM");
+            System.out.println("========================================");
+            System.out.println("1️⃣  Show products");
+            System.out.println("2️⃣  Add customer");
+            System.out.println("3️⃣  Show customers");
+            System.out.println("4️⃣  Shop as customer");
+            System.out.println("0️⃣  Exit ❌");
+            System.out.println("========================================");
+            System.out.print("👉 Choose an option: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -44,11 +48,18 @@ public class Main {
                     System.out.println("No customers registered yet, PLease add a new customer.");
                     currentCustomer = addCustomerFromUserInput(scanner, store);
                 } else {
-                    for (int i = 0; i < store.getCustomers().size(); i++) {
+                    /*for (int i = 0; i < store.getCustomers().size(); i++) {
                         System.out.println((i + 1) + ". " + store.getCustomers().get(i).getName());
                     }
                     System.out.println("0. Add new customer");
-                    System.out.println("Choose a number: ");
+                    System.out.println("Choose a number: ");*/
+                    System.out.println("\n===== 🧑‍🤝‍🧑 SELECT CUSTOMER =====\n");
+                    for (int i = 0; i < store.getCustomers().size(); i++) {
+                        System.out.println(" " + (i + 1) + ". " + store.getCustomers().get(i).getName());
+                    }
+                    System.out.println(" 0. ➕ Add new customer");
+                    System.out.println("\n==============================");
+                    System.out.print("👉 Choose a number: ");
                     int index = scanner.nextInt();
                     scanner.nextLine();
 
@@ -64,15 +75,16 @@ public class Main {
 
             boolean  runShoppingMenu = true;
             while (runShoppingMenu) {
-                System.out.println("\n=== Shopping menu for " + currentCustomer.getName() + " ===");
-                System.out.println("1. Show products");
-                System.out.println("2. Add product to cart");
-                System.out.println("3. Remove product from cart");
-                System.out.println("4. Show cart");
-                System.out.println("5. Place order");
-                System.out.println("6. Show my orders");
-                System.out.println("0. Back to main menu");
-                System.out.print("Choose a number: ");
+                System.out.println("\n===== 🛒 SHOPPING MENU for " + currentCustomer.getName() + " =====");
+                System.out.println(" 1️⃣ Show products");
+                System.out.println(" 2️⃣ Add product to cart");
+                System.out.println(" 3️⃣ Remove product from cart");
+                System.out.println(" 4️⃣ Show cart");
+                System.out.println(" 5️⃣ Place order");
+                System.out.println(" 6️⃣ Show my orders");
+                System.out.println(" 0️⃣ Back to main menu");
+                System.out.println("========================================");
+                System.out.print("👉 Choose an option: ");
 
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -142,12 +154,14 @@ public class Main {
             return;
         }
 
-        System.out.println("Choose shipping method: ");
-        System.out.println("1. PostNord");
-        System.out.println("2. DHL");
-        System.out.println("3. Instabox");
+        System.out.println("\n📦 Choose shipping method:");
+        System.out.println(" 1️⃣ PostNord");
+        System.out.println(" 2️⃣ DHL");
+        System.out.println(" 3️⃣ Instabox");
+        System.out.print("👉 Your choice: ");
         int shipChoice = scanner.nextInt();
         scanner.nextLine();
+
         String shippingMethod = switch (shipChoice) {
             case 1 -> "PostNord";
             case 2 -> "DHL";
@@ -156,12 +170,14 @@ public class Main {
         };
         Shipping shipping = new Shipping(shippingMethod);
 
-        System.out.println("Choose payment method: ");
-        System.out.println("1. Credit card");
-        System.out.println("2. Swish");
-        System.out.println("3. Invoice");
+        System.out.println("\n💳 Choose payment method:");
+        System.out.println(" 1️⃣ Credit card");
+        System.out.println(" 2️⃣ Swish");
+        System.out.println(" 3️⃣ Invoice");
+        System.out.print("👉 Your choice: ");
         int payChoice = scanner.nextInt();
         scanner.nextLine();
+
         String paymentMethod = switch (payChoice) {
             case 1 -> "Credit card";
             case 2 -> "Swish";
@@ -173,7 +189,10 @@ public class Main {
         Order order = store.createOrder(currentCustomer, currentCustomer.getCart(), shipping, payment);
         if (order != null) {
             currentCustomer.addOrder(order);
-            System.out.println("Order placed successfully! Total: " + currentCustomer.getCart().calculateTotal() + " kr");
+            System.out.println("\n✅ Order placed successfully!");
+            System.out.println(" 💰 Total: " + currentCustomer.getCart().calculateTotal() + "$");
+            System.out.println(" 📦 Shipping: " + shipping.getDeliveryMethod());
+            System.out.println(" 💳 Payment: " + payment.getMethod() + "\n");
             currentCustomer.getCart().clear();
         }
     }

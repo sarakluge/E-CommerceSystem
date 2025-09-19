@@ -21,11 +21,16 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "status='" + status + '\'' +
-                ", shipping=" + shipping.getDeliveryMethod() +
-                ", payment=" + payment.getMethod() +
-                ", total=" + payment.getTotal() +
-                " $}";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Status: ").append(status).append("\n");
+        sb.append("Customer: ").append(customer.getName()).append("\n");
+        sb.append("Shipping: ").append(shipping.getDeliveryMethod()).append("\n");
+        sb.append("Payment: ").append(payment.getMethod()).append("\n");
+        sb.append("Items:\n");
+        for (CartItem item : items) {
+            sb.append("  - ").append(item).append("\n");
+        }
+        sb.append("💰 Total: ").append(payment.getTotal()).append("$");
+        return sb.toString();
     }
 }

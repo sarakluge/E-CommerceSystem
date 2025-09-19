@@ -36,13 +36,16 @@ public class Customer {
     }
 
     public void showOrders() {
+        System.out.println("\n===== 📑 ORDERS for " + name + " =====\n");
         if (orders.isEmpty()) {
-            System.out.println(name + " has no orders yet.");
+            System.out.println(" (no orders placed yet)");
         } else {
-            System.out.println("\n--- " + name + "'s orders ---");
             for (int i = 0; i < orders.size(); i++) {
-                System.out.println((i + 1) + ". " + orders.get(i));
+                System.out.println("Order " + (i + 1) + ":");
+                System.out.println(orders.get(i));
+                System.out.println("----------------------------------------");
             }
         }
+        System.out.println("\n==============================\n");
     }
 }
